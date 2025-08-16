@@ -35,17 +35,18 @@ def load_world(workbook_path: str) -> WorldAnalogs:
 
 try:
     wa = load_world(workbook_path)
-    with st.expander("Debug: show AU key per sheet"):
-    import pandas as pd
-    def au_key(df):  # mirrors the finder
-        from worldanalogs_tools import WorldAnalogs as _W
-        return _W._find_col.__func__(None, df, ["AU_Code", "AU Number", "AU_Number"])
-    st.write({
-        "Geology": au_key(wa.geology),
-        "Oil": au_key(wa.oil),
-        "Gas": au_key(wa.gas),
-        "BOE": au_key(wa.boe),
-    })
+        with st.expander("Debug: show AU key per sheet"):
+            import pandas as pd
+            def au_key(df):  # mirrors the finder
+                from worldanalogs_tools import WorldAnalogs as _W
+                return _W._find_col.__func__(None, df, ["AU_Code", "AU Number", "AU_Number"])
+            st.write({
+                "Geology": au_key(wa.geology),
+                "Oil": au_key(wa.oil),
+                "Gas": au_key(wa.gas),
+                "BOE": au_key(wa.boe),
+        })
+
 
 except Exception as e:
     st.error(str(e))
